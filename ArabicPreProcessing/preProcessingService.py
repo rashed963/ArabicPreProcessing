@@ -203,7 +203,9 @@ class GeneralProcessingService:
     }
     emojies_dict = {v: k for k, v in emojies_uni.items()}
 
-    def __init__(self, input_data):
+    def __init__(self, input_data=[],data_path=''):
+        '''input data as list through input_data, or as file through data_path,
+        output pre-processed data as list'''
         import pandas as pd
 
         self.data = pd.DataFrame()
@@ -216,6 +218,9 @@ class GeneralProcessingService:
 
         stop_wrods = pd.read_csv(stop_word_file_path, error_bad_lines=False, names=['stopword'])
         self.stop_words = list(stop_wrods['stopword'])
+        
+        if data_path != '':
+            self.data['content'] = pd.read_csv(data_path, error_bad_lines=False, names=['content'])
 
         self.cleanedData = []
         self.hashTags = []
@@ -355,10 +360,10 @@ class GeneralProcessingService:
 
             return
 
-    def semi_pre_processing(self, ex_words=[]):
-        self.remove_hashtags(1)
+    def full_processing(self, ex_words=[]):
+        
         self.initial_pre_processing()
-#         self.remove_names(ex_words)
+        self.remove_hashtags(1)
         self.remove_stop_words()
         self.normalize()
         self.final_pre_processing_step()
@@ -372,7 +377,4 @@ class GeneralProcessingService:
     # data['content'] = pd.read_csv('SentimentDSPreprocessed.csv',names=['content'])
     # p = GeneralProcessingService(data['content']) 
     # return p.cleanedData
-
-
-
-
+    
