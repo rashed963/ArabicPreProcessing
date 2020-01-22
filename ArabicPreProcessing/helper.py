@@ -1,5 +1,5 @@
 class Helper:
-    import re
+    import regex as re
     def __init__(self,obj):
         if type(obj) is list:
             self.Dict = self.to_Dictionary(obj)
