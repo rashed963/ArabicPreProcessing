@@ -1,4 +1,5 @@
 class Helper:
+    import re
     def __init__(self,obj):
         if type(obj) is list:
             self.Dict = self.to_Dictionary(obj)
@@ -7,7 +8,6 @@ class Helper:
         return
 
     def deHelper(self, string):
-        import re
         def replace(match):
             val = self.Dict.get(match.group(0), match.group(0))
             return val[1:-1]
