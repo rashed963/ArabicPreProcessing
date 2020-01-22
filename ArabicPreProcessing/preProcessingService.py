@@ -244,7 +244,6 @@ class GeneralProcessingService:
         return
 
     def initial_pre_processing(self):
-        import re
         temp = list((self.data['content']))
         self.cleanedData += [re.sub(r'[A-Za-z]+|[\u0400-\u0500]+', '', str(item)) for item in temp]
         return
@@ -257,7 +256,6 @@ class GeneralProcessingService:
             return
 
     def remove_mentions(self, mentions=[]):
-        import re
         WORD = re.compile(r'\w+')
 
         flatten = []
