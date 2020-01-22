@@ -1,4 +1,4 @@
-import re
+import regex as re
 import nltk
 import os
 from ArabicPreProcessing.helper import Helper
